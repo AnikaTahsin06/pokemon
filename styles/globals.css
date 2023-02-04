@@ -103,6 +103,23 @@ a {
   color: inherit;
   text-decoration: none;
 }
+/* .dis {
+  margin: 0 10%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+} */
+.cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+.card {
+  width: 12rem;
+  height: 15rem;
+  padding: 2px;
+  background: linear-gradient(to top left, transparent 35px, white 0px);
+}
 
 @media (prefers-color-scheme: dark) {
   html {
