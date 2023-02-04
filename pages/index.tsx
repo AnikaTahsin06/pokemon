@@ -1,9 +1,11 @@
-import { Inter } from "@next/font/google";
+// @ts-nocheck
 import Image from "next/image";
+import { Inter } from "@next/font/google";
 import { useState } from "react";
+import Cards from "./Components/Cards";
+import logo from "./images/Logo.png";
 
 const inter = Inter({ subsets: ["latin"] });
-
 export default function Home() {
   const [pokemons, setPokemons] = useState([]);
   const gqlQuery = `query pokemons($limit: Int, $offset: Int) {
@@ -39,23 +41,9 @@ export default function Home() {
     .then((res) => setPokemons(res.data.pokemons.results));
 
   return (
-    <div className="bg-red-800 grid h-screen place-items-center">
-      <h1 className="text-gray-100 text-6xl">Pokemon</h1>
-      <div className="cards">
-        {pokemons.map((pokemon: any) => {
-          return (
-            <div className="max-w-sm rounded overflow-hidden  card ">
-              <img src={pokemon.image} alt="" />
-              <h1>{pokemon.name}</h1>
-              <div className="px-6 pt-4 pb-2">
-                <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
-                  #photography
-                </span>
-              </div>
-            </div>
-          );
-        })}
-      </div>
+    <div className="background bg-cover grid h-screen place-items-center">
+      <Image src={logo} width={200} height={200} />
+      <Cards pokemons={pokemons} />
     </div>
   );
 }
