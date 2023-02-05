@@ -110,6 +110,7 @@ a {
   padding: 2px;
   background: linear-gradient(to top left, transparent 35px, white 0px);
 }
+
 .card:hover {
   background: linear-gradient(to top left, transparent 35px, #257bc4 0px);
 }
