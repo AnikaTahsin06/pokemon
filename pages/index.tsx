@@ -10,6 +10,8 @@ import { useEffect, useState } from "react";
 import Cards from "./Components/Cards";
 import logo from "./images/Logo.png";
 import left from "./images/Left.png";
+import image02 from "./images/Image02.png";
+import image03 from "./images/Image03.png";
 import { getAllPokemon, getPokemon } from "@/services/services";
 import { homedir } from "os";
 import { LanguageVariant } from "typescript";
@@ -43,6 +45,7 @@ export default function Home() {
         <br />
         <br />
         <Cards pokemons={pokemons} />
+
         <a href={1}>next</a>
         <br />
         <br />
@@ -51,13 +54,16 @@ export default function Home() {
         <div className="col-auto background bg-cover">
           <Image src={left} className="h-screen" />
         </div>
-        <div className="col-span-10  bg-white">
-          <h1>Anika</h1>
-          <h1>Anika</h1>
-          <h1>Anika</h1>
-          <h1>Anika</h1>
-          <h1>Anika</h1>
-          <h1>Anika</h1>
+        <div className="col-span-10 grid grid-cols-12  bg-white mx-8">
+          {pokemons.map((pokemon) => {
+            return (
+              <h1>
+                {pokemon.abilities.map((ability) => {
+                  ability.name;
+                })}
+              </h1>
+            );
+          })}
         </div>
         <div className="col-auto background bg-cover">
           <Image src={left} className="h-screen" />

@@ -47,3 +47,60 @@ export async function getPokemon(url) {
       });
   });
 }
+
+export async function getPokemonDetails(name) {
+  const gqlQuery = `query pokemon($name: String!) {
+          pokemon(name: $name) {
+              id
+              name
+              base_experience
+              height
+              weight
+              order
+              sprites {
+                  front_default
+              }
+              stats{
+                  base_stat
+                  stat{
+                      name
+                  }
+              }
+              abilities {
+                  ability {
+                      name
+                  }
+              }
+              moves {
+                  move {
+                      name
+                  }
+              }
+              types {
+                  type {
+                      name
+                  }
+              }
+              message
+              status
+          }
+      }`;
+
+  return new Promise((resolve, reject) => {
+    fetch("https://graphql-pokeapi.graphcdn.app/", {
+      credentials: "omit",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        query: gqlQuery,
+        variables: {
+          name: name,
+        },
+      }),
+      method: "POST",
+    })
+      .then((res) => res.json())
+      .then((res) => {
+        resolve(res);
+      });
+  });
+}

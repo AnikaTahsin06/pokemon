@@ -3,8 +3,11 @@ import Image from "next/image";
 import logo from "./images/Logo.png";
 import left from "./images/Left.png";
 import pokemon from "./images/image 10.png";
+import { getPokemonDetails } from "@/services/services";
 
-const details = () => {
+const details = ({ data }) => {
+  console.log(data);
+  let percentage = 50 + "%";
   return (
     <div className="grid grid-cols-12 bg-cover   h-screen   bg-white">
       <div className="col-auto background bg-cover">
@@ -48,7 +51,7 @@ const details = () => {
             </button>
           </div>
         </div>
-        <div className="col-span-4 bg-current grid grid-rows-2 justify-items-start self-center ">
+        <div className="col-span-4   grid grid-rows-3 justify-items-start self-center mr-20">
           <div className="bg-gray-400 m-2 p-2">
             <h1>Anka</h1>
             <h1>Anka</h1>
@@ -60,6 +63,21 @@ const details = () => {
             <h1>Anika</h1>
             <h1>Anika</h1>
             <h1>Anika</h1>
+          </div>
+          <div className=" m-2 p-2 w-full">
+            {data.stats.map((stat) => {
+              return (
+                <div>
+                  <h1>{stat.stat.name}</h1>
+                  <div className="bg-gray-500 h-1 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-blue-500"
+                      style={{ width: percentage }}
+                    ></div>
+                  </div>
+                </div>
+              );
+            })}
           </div>
         </div>
       </div>
@@ -71,3 +89,21 @@ const details = () => {
 };
 
 export default details;
+
+export async function getStaticPaths() {
+  return {
+    paths: [],
+    fallback: true,
+  };
+}
+
+export async function getStaticProps({ params }) {
+  // console.log(params);
+  const res = await getPokemonDetails(params.id);
+  // console.log(res);
+  return {
+    props: {
+      data: res.data.pokemon,
+    },
+  };
+}
